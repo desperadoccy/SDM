@@ -1,0 +1,62 @@
+<script>
+    $(function() {
+        $.post('FindUserServlet', {}, function(data) {
+            if (!data) {
+                var msg = "<div class=\"top-social\" style=\"color: aliceblue;\">\n" +
+                    "                                        <a href=\"login.html\" style=\"color: aliceblue;\" onmouseout=\"out(this)\" onmouseover=\"over(this)\">登录</a> /\n" +
+                    "                                        <a href=\"register.html\" style=\"color: aliceblue;\" onmouseout=\"out(this)\" onmouseover=\"over(this)\">注册</a>\n" +
+                    "                                    </div>"
+                $("#user_log").html(msg);
+            } else {
+                var msg = "<div style='color: aliceblue;'>欢迎," +
+                    "<a href=" + data.identity + ".html style=\"color: aliceblue;\" onmouseout=\"out(this)\" onmouseover=\"over(this)\">" +
+                    data.username + "</a>" + "&nbsp;&nbsp;" +
+                    "<a href=\"javascript:location.href='exitServlet';\" style=\"color: aliceblue;\" onmouseout=\"out(this)\" onmouseover=\"over(this)\">" +
+                    "退出</a></div>";
+                $("#user_log").html(msg);
+            }
+        });
+    })
+</script>
+<header id="header">
+    <div class="top-bar">
+        <div class="wrap-top zerogrid">
+            <div class="row">
+                <div class="col-1-2">
+                    <div class="wrap-col">
+                        <ul>
+                            <li class="mail">
+                                <p>527707607@qq.com</p>
+                            </li>
+                            <li class="phone">
+                                <p>6666666</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-2">
+                    <div class="wrap-col f-right">
+                        <div id="user_log">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-header">
+        <div class="zerogrid">
+            <div class="row">
+                <div class="col-1-3">
+                    <div class="wrap-col">
+                        <div class="logo">
+                            <a href="index.html"><img src="images/logo.png" /></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</header>

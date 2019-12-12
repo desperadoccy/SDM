@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>注册</title>
+    <script src="js/jquery.min.js"></script>
+    <link href="css/login.css" rel="stylesheet" type="text/css" />
+    <script>
+        //表单校验
+        function checkUsername() {
+            var username = $("#username").val();
+            var reg_username = /^\w{2,20}$/;
+            var flag = reg_username.test(username);
+            if (flag) {
+                $("#username").css("border", "1px solid #DCDEE0");
+            } else {
+                $("#username").css("border", "1px solid red");
+            }
+            return flag;
+        }
+
+        function checkPassword() {
+            var password = $("#password").val();
+            var reg_password = /^\w{2,20}$/;
+            var flag = reg_password.test(password);
+            if (flag) {
+                $("#password").css("border", "1px solid #DCDEE0");
+            } else {
+                $("#password").css("border", "1px solid red");
+            }
+            return flag;
+        }
+
+        $(function() {
+            $("#registerForm").submit(function() {
+                if (checkUsername() && checkPassword()) {
+                    $.post("registUserServlet", $(this).serialize(), function(data) {
+                        if(data.flag == true){
+                            //跳转成功界面
+                            location.href = "register_ok.html";
+                        }else{
+                            //报错
+                            alert(data.errorMsg);
+                        }
+                    });
+                }
+                return false;
+            });
+            $("#username").blur(checkUsername);
+            $("#password").blur(checkPassword);
+        });
+    </script>
+</head>
+
+<body>
+    <div class="login_box">
+        <div class="login_l_img"><img src="images/logo.png" /></div>
+        <div class="login">
+            <div class="login_logo">
+                <a href="#"><img src="images/login_logo.png" /></a>
+            </div>
+            <div class="login_name">
+                <p>注册界面</p>
+            </div>
+            <form method="post" id="registerForm">
+                <input id="username" name="username" type="text" placeholder="用户名" required>
+                <input id="password" name="password" type="password" id="password" placeholder="密码" required/>
+                <input value="注册" style="width:100%;" type="submit">
+            </form>
+        </div>
+        <div class="copyright">©2019 第十组医院</div>
+    </div>
+</body>
+
+</html>
